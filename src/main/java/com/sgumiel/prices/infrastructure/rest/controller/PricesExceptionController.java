@@ -23,18 +23,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @RequiredArgsConstructor
 public class PricesExceptionController {
 
-  private final ApiErrorResponseFactory apiErrorResponseFactory;
   private final FieldErrorToApiErrorResponseMapper fieldErrorToApiErrorResponseMapper;
-
-  @ExceptionHandler({PriceException.class})
-  public ResponseEntity<ApiErrorResponse> handlePriceException(PriceException priceException) {
-    log.debug("Handle for price exception: {}", priceException);
-
-    final var apiErrorResponse = this.apiErrorResponseFactory.createApiErrorResponse(priceException);
-
-    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiErrorResponse);
-
-  }
 
   @ExceptionHandler({BindException.class, MethodArgumentNotValidException.class})
   public ResponseEntity<List<ApiErrorResponse>> handlePriceException(BindException exception) {
@@ -48,14 +37,6 @@ public class PricesExceptionController {
             .collect(Collectors.toList());
 
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiErrorList);
-
-  }
-
-  @ExceptionHandler
-  public ResponseEntity<List<ApiErrorResponse>> handlePriceException(MissingServletRequestParameterException exception) {
-    log.debug("Handle for exception: {}", exception);
-
-    return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 
   }
 }
