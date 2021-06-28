@@ -1,0 +1,44 @@
+management:
+  server:
+    port: 8081
+    ssl:
+      enabled: false
+  endpoints:
+    web:
+      base-path: /
+server:
+  port: 8080
+  servlet:
+    context-path: /prices
+
+spring:
+  h2:
+    console:
+      path: /h2-console
+      enabled: true
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
+    generate-ddl: false
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baselineOnMigrate: true
+    out-of-order: true
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:PRICES;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: prices
+    password: prices
+    continueOnError: true
+
+springdoc:
+  api-docs:
+    path: /api-docs
+

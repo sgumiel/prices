@@ -1,0 +1,26 @@
+spring:
+  h2:
+    console:
+      enabled: false
+      path: /h2-console
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:PRICES;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+  jpa:
+    properties:
+      hibernate:
+        use_sql_comments: false
+        show_sql: false
+        format_sql: false
+    hibernate:
+      ddl-auto: none
+    jackson:
+      date-format: yyyy-MM-dd HH:mm:ss
+      default-property-inclusion: non_null
+  flyway:
+    enabled: false
+
+logging:
+  level:
+    root: ERROR
+    com.sgumiel.prices: INFO
